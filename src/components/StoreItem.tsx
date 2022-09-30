@@ -35,7 +35,7 @@ const StoreItem = ({id,name,price,imgUrl}:storeItemProps) => {
                             <Button onClick={()=>increaseCartQuantity(id)}>+</Button>
                             </div>
                             <div className='d-flex justify-content-center align-items-center' style={{gap:'.5rem'}}>
-                             <Button variant='danger' onClick={()=>removeFromCart(id)}>Remove</Button>
+                             <Button variant='danger' onClick={()=>removeFromCart(id)}>Remove from cart</Button>
                             </div>
                         </div>}
                     </div>
