@@ -1,5 +1,6 @@
 import React from 'react';
 import {Card,Button} from 'react-bootstrap'
+import { useShoppingCart } from '../context/ShoppingCartContext';
 import { formatCurrency } from '../utilities/formatCurrency';
 
 type storeItemProps = {
@@ -10,7 +11,8 @@ type storeItemProps = {
 }
 
 const StoreItem = ({id,name,price,imgUrl}:storeItemProps) => {
-    let quantity = 1;
+    const {getitemQuantity , increaseCartQuantity ,decreaseCartQuantity ,removeFromCart} = useShoppingCart()
+    const quantity = getitemQuantity(id);
     return (
         <>
             <Card className='h-100'>
@@ -22,18 +24,18 @@ const StoreItem = ({id,name,price,imgUrl}:storeItemProps) => {
                     </Card.Title>
                     <div className='mt-auto'>
                         {quantity === 0 ? 
-                        <Button className='w-100'>+ Add to cart</Button> 
+                        <Button className='w-100' onClick={()=>increaseCartQuantity(id)}>+ Add to cart</Button> 
                         : 
                         <div className='d-flex align-items-center flex-column' style={{gap:'.5rem'}}>
                             <div className='d-flex mx-2' style={{gap:'.5rem'}}>
-                            <Button>-</Button>
+                            <Button onClick={()=>decreaseCartQuantity(id)}>-</Button>
                             <div>
                                 <span className='fs-3'>{quantity} in cart</span>
                             </div>
-                            <Button>+</Button>
+                            <Button onClick={()=>increaseCartQuantity(id)}>+</Button>
                             </div>
                             <div className='d-flex justify-content-center align-items-center' style={{gap:'.5rem'}}>
-                             <Button variant='danger'>Remove</Button>
+                             <Button variant='danger' onClick={()=>removeFromCart(id)}>Remove</Button>
                             </div>
                         </div>}
                     </div>
