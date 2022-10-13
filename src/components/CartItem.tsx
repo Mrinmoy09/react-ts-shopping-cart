@@ -6,7 +6,7 @@ import { formatCurrency } from '../utilities/formatCurrency';
 
 type CartItemProps = {
     id:number;
-    quantity:number
+    quantity:number;
 }
 
 const CartItem = ({id , quantity}:CartItemProps) => {
@@ -21,11 +21,11 @@ const CartItem = ({id , quantity}:CartItemProps) => {
                     {item?.name} {quantity > 1 && <span className='text-muted' style={{fontSize:'.85rem'}}>*{quantity}</span>}
                 </div>
                 <div className='text-muted' style={{fontSize:'.95rem'}}>
-                    {formatCurrency(item?.price)}
+                    {formatCurrency(item?.price as number)}
                 </div>
             </div>
-            <div>{formatCurrency(item?.price * quantity)}</div>
-            <Button variant='outline-danger' onClick={()=>removeFromCart(item?.id)}>X</Button>
+            <div>{formatCurrency(item?.price as number * quantity)}</div>
+            <Button variant='outline-danger' onClick={()=>removeFromCart(item?.id as number)}>X</Button>
         </Stack>
     );
 };
